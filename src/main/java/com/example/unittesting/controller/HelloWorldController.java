@@ -1,4 +1,4 @@
-package com.example.unittesting;
+package com.example.unittesting.controller;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;

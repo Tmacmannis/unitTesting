@@ -81,7 +81,7 @@ public class ListMockTest {
     public void spying(){
 
         ArrayList arrayListSpy = spy(ArrayList.class);
-        arrayListSpy.get(0);
+        //arrayListSpy.get(0);
         arrayListSpy.size();
         arrayListSpy.add("Test");
         arrayListSpy.add("Test2");
