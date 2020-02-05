@@ -1,4 +1,7 @@
-import data.SomeDataService;
+package com.example.unittesting.business;
+
+import com.example.unittesting.business.SomeBusinessImpl;
+import com.example.unittesting.data.SomeDataService;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

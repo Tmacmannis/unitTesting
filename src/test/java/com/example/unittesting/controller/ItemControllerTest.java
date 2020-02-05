@@ -15,6 +15,8 @@ import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.RequestBuilder;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
+import java.util.Arrays;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
@@ -38,7 +40,7 @@ public class ItemControllerTest {
                 .accept(MediaType.APPLICATION_JSON);
         MvcResult result = mockMvc.perform(request).andReturn();
 
-        assertEquals("{\"id\":1,\"name\":\"Ball\",\"price\":10,\"quantity\":100}", result.getResponse().getContentAsString());
+        assertEquals("{\"id\":1,\"name\":\"Ball\",\"price\":10,\"quantity\":100,\"value\":0}", result.getResponse().getContentAsString());
     }
 
     //same as above but with verifying returned status and content
@@ -69,6 +71,26 @@ public class ItemControllerTest {
         MvcResult result = mockMvc.perform(request)
                 .andExpect(status().isOk())
                 .andExpect(content().json("{\"id\":2,\"name\":\"Item 2\",\"price\":2,\"quantity\":2}")) //using .json instead of .string allows spaces to be still matched
+                .andReturn();
+
+        //no longer needed
+        //assertEquals("Hello World", result.getResponse().getContentAsString());
+    }
+
+    @Test
+    public void retrieveAllItems_basic() throws Exception {
+
+        when(businessService.retrieveAllItems()).thenReturn(
+                Arrays.asList(new Item(2, "Item2", 2, 2),
+                        new Item(3, "Item3", 20, 20))
+                );
+
+        RequestBuilder request = MockMvcRequestBuilders
+                .get("/all-items-from-database")
+                .accept(MediaType.APPLICATION_JSON);
+        MvcResult result = mockMvc.perform(request)
+                .andExpect(status().isOk())
+                .andExpect(content().json("[{\"id\":2,\"name\":\"Item2\",\"price\":2,\"quantity\":2},{}]")) //using .json instead of .string allows spaces to be still matched
                 .andReturn();
 
         //no longer needed

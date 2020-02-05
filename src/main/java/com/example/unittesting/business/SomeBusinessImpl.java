@@ -1,4 +1,6 @@
-import data.SomeDataService;
+package com.example.unittesting.business;
+
+import com.example.unittesting.data.SomeDataService;
 
 public class SomeBusinessImpl {
 
